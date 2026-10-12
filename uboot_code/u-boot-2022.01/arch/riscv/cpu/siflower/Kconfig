@@ -1,0 +1,40 @@
+config SYS_SOC
+	default "siflower"
+
+config SYS_VENDOR
+	default "siflower"
+
+config SF21H8898
+	bool "Siflower SF21H8898 SoC"
+
+config SF23A2892
+	bool "Siflower SF23A2892 SoC"
+
+config SF21A6826
+	bool "Siflower SF21A6826 SoC"
+	select BINMAN
+
+config SYS_BOARD
+	string "Board name"
+	default "riscv" if TARGET_SF21H8898_V2
+	default "riscv" if TARGET_SF23A2892
+	default "riscv" if TARGET_SF21A6826
+	default ""
+	help
+	  This option contains information about board name.
+	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD> will
+	  be used.
+
+config SYS_CONFIG_NAME
+	string "Board configuration name"
+	default "sf21h8898" if TARGET_SF21H8898
+	default "sf23a2892" if TARGET_SF23A2892
+	default "sf21a6826" if TARGET_SF21A6826
+	default ""
+	help
+	  This option contains information about board configuration name.
+	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+	  will be used for board configuration.
+
+config SIFLOWER_UBOOT_COMPRESSED
+	bool "Build FIT image with u-boot compressed"

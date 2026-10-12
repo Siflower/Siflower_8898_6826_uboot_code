@@ -1,0 +1,7 @@
+config SF_HASH
+	bool "Siflower Crypto Driver Support"
+	select SF_SHA_HW_ACCEL
+	imply SPL_CRYPTO if (ARM && SPL)
+	imply CMD_HASH
+	help
+	  Enables the Siflower hash for Kernel Secure Boot

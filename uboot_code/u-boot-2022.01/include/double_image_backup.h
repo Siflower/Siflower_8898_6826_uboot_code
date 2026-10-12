@@ -1,0 +1,18 @@
+#ifndef DOUBLE_IMAGE_BACKUP_
+#define DOUBLE_IMAGE_BACKUP_
+
+#define FACTORY_OFFSET 0x90000
+#define FACTORY_SIZE 0x10000
+#define FACTORY_BACKUP_FLAG_OFFSET 175
+#define BAKUP_FLAG_ON_RAM_ADDRESS 0x1c00fffc
+#define LAST_BOOTUP_FAILED 0xAAAAAAAA
+#define BOOTUP_IMAGE 0xAAAAAAAA
+#define MASTER_IMAGE 0xFFFFFFFF
+#define BACKUP_IMAGE 0xEEEEEEEE
+#define BOOT_MASTER 0
+#define BOOT_BACKUP 1
+
+void staring_up_image(void);
+int need_boot_backup_img(void);
+
+#endif

@@ -1,0 +1,126 @@
+// SPDX-License-Identifier: GPL-2.0+
+/*
+ * Copyright (C) 2021, Bin Meng <bmeng.cn@gmail.com>
+ */
+
+#include <config.h>
+
+/ {
+	binman: binman {
+		multiple-images;
+	};
+};
+
+&binman {
+	itb {
+		filename = "u-boot.itb";
+
+		fit {
+			description = "Configuration to load OpenSBI before U-Boot";
+			#address-cells = <1>;
+			fit,fdt-list = "of-list";
+
+			images {
+				uboot {
+					description = "U-Boot";
+					type = "standalone";
+					os = "U-Boot";
+					arch = "riscv";
+#ifdef CONFIG_SIFLOWER_UBOOT_COMPRESSED
+					compression = "lzma";
+#else
+					compression = "none";
+#endif
+					load = <CONFIG_SYS_TEXT_BASE>;
+
+#ifdef CONFIG_FIT_SIGNATURE
+                                        signature {
+                                                algo = "sha256,rsa4096";
+                                                key-name-hint = "fit_key";
+                                        };
+#else
+                                        hash-1 {
+						algo = "sha256";
+					};
+#endif
+					uboot_blob: blob-ext {
+						filename = "u-boot-nodtb.bin";
+#ifdef CONFIG_SIFLOWER_UBOOT_COMPRESSED
+						compress = "lzma";
+#endif
+					};
+				};
+
+#ifdef CONFIG_RISCV_SMODE
+				opensbi {
+					description = "OpenSBI fw_dynamic Firmware";
+					type = "firmware";
+					os = "opensbi";
+					arch = "riscv";
+#ifdef CONFIG_SIFLOWER_UBOOT_COMPRESSED
+					compression = "lzma";
+#else
+					compression = "none";
+#endif
+#ifdef CONFIG_FIT_SIGNATURE
+                                        signature {
+                                                algo = "sha256,rsa4096";
+                                                key-name-hint = "fit_key";
+                                        };
+#else
+                                        hash-1 {
+						algo = "sha256";
+					};
+#endif
+					opensbi_blob: opensbi {
+						filename = "fw_dynamic.bin";
+#ifdef CONFIG_SIFLOWER_UBOOT_COMPRESSED
+						compress = "lzma";
+#endif
+					};
+				};
+#endif
+
+				fdt-1 {
+					description = "U-boot Device Tree";
+					type = "flat_dt";
+#ifdef CONFIG_SIFLOWER_UBOOT_COMPRESSED
+					compression = "lzma";
+#else
+					compression = "none";
+#endif
+#ifdef CONFIG_FIT_SIGNATURE
+                                        signature {
+                                                algo = "sha256,rsa4096";
+                                                key-name-hint = "fit_key";
+                                        };
+#else
+                                        hash-1 {
+						algo = "sha256";
+					};
+#endif
+					blob {
+						filename = "dts/dt.dtb";
+#ifdef CONFIG_SIFLOWER_UBOOT_COMPRESSED
+						compress = "lzma";
+#endif
+					};
+				};
+			};
+
+                        configurations {
+                                default = "conf-1";
+                                conf-1 {
+                                        description = "NAME";
+#ifdef  CONFIG_RISCV_SMODE
+                                        firmware = "opensbi";
+                                        loadables = "uboot";
+#else
+                                        firmware = "uboot";
+#endif
+                                        fdt = "fdt-1";
+                                };
+			};
+		};
+	};
+};

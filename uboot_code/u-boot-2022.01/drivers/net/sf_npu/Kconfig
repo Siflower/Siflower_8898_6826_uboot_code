@@ -1,0 +1,7 @@
+
+
+config DRIVER_SF_NPU
+	bool "Siflower Common Platform Ethernet Driver"
+	default n
+	help
+	  This driver just supports table config now.

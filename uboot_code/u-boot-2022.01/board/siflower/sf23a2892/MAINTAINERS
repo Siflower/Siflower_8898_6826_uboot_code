@@ -1,0 +1,6 @@
+SF23A2892
+M:	Mark Cai <mark.cai@siflower.com.cn>
+S:	Maintained
+F:	board/siflower/sf23a2892
+F:	include/configs/sf23a2892.h
+F:	configs/siflower_sf23a2892_defconfig

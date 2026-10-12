@@ -1,0 +1,6 @@
+SF21H8898
+M:	Kaijun Wang <kaijun.wang@siflower.com.cn>
+S:	Maintained
+F:	board/siflower/sf21h8898
+F:	include/configs/sf21h8898.h
+F:	configs/siflower_sf21h8898_defconfig

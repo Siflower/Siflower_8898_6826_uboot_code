@@ -1,0 +1,141 @@
+// SPDX-License-Identifier: GPL-2.0
+#include "sf21a6826_fullmask.dtsi"
+#include <dt-bindings/input/input.h>
+
+/ {
+	chosen {
+		stdout-path = &uart1;
+		tick-timer = &timer;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		led_status: led-status {
+			label = "status:blue";
+			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
+		};
+	};
+
+	keys {
+		compatible = "gpio-keys";
+		pinctrl-names = "default";
+		pinctrl-0 = <&rstbtn_pin>;
+
+		reset {
+			label = "reset";
+			linux,code = <KEY_RESTART>;
+			gpios = <&gpio 29 GPIO_ACTIVE_LOW>;
+		};
+	};
+};
+
+&iomux {
+	rstbtn_pin: rstbtn_pin {
+		pinctrl-single,pins = <RGMII_RXD0 GPIO_MODE>;
+		pinctrl-single,bias-pullup = <SW_PU SW_PU 0 SW_PU>;
+		pinctrl-single,bias-pulldown = <0 SW_PD 0 SW_PD>;
+	};
+};
+
+&uart1 {
+	u-boot,dm-pre-reloc;
+};
+
+&watchdog {
+	u-boot,dm-pre-reloc;
+};
+
+&timer0 {
+	u-boot,dm-pre-reloc;
+};
+
+&spi0_pins {
+	pinctrl-single,pins = <
+		SPI0_TXD	FUNC_MODE0
+		SPI0_RXD	FUNC_MODE0
+		SPI0_CLK	FUNC_MODE0
+		SPI0_HOLD	FUNC_MODE0
+		SPI0_WP		FUNC_MODE0
+	>;
+};
+
+&i2c0 {
+	status = "disabled";
+};
+
+&gmac0 {
+        status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+        phy-handle = <&sfphy0>;
+};
+
+&gmac1 {
+        status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+        phy-handle = <&sfphy1>;
+};
+
+&gmac2 {
+        status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+        phy-handle = <&sfphy2>;
+};
+
+&gmac3 {
+        status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+        phy-handle = <&sfphy3>;
+};
+
+&gmac4 {
+        status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+        phy-handle = <&ytphy>;
+};
+
+&mdio0 {
+        reset-gpios = <&gpio 30 GPIO_ACTIVE_LOW>;
+        reset-delay-us = <10000>;
+        reset-post-delay-us = <100000>;
+
+        sfphy0: ethernet-phy@1 {
+                compatible = "ethernet-phy-idadb4.0411";
+                reg = <0x1>;
+        };
+
+        sfphy1: ethernet-phy@2 {
+                compatible = "ethernet-phy-idadb4.0411";
+                reg = <0x2>;
+        };
+
+        sfphy2: ethernet-phy@3 {
+                compatible = "ethernet-phy-idadb4.0411";
+                reg = <0x3>;
+        };
+
+        sfphy3: ethernet-phy@4 {
+                compatible = "ethernet-phy-idadb4.0411";
+                reg = <0x4>;
+        };
+
+	ytphy: ethernet-phy@7 {
+                compatible = "ethernet-phy-id03a2.a411";
+                reg = <0x7>;
+                reset-gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
+                reset-assert-us = <10000>;
+                reset-deassert-us = <100000>;
+        };
+};
+
+&mdio1 {
+	status = "disabled";
+};
+
+&xpcs0 {
+	enable;
+};
+
+&xpcs1 {
+	enable;
+};

@@ -1,0 +1,109 @@
+// SPDX-License-Identifier: GPL-2.0
+
+/dts-v1/;
+#include "sf21a6826_fullmask.dtsi"
+
+/ {
+	model = "sf21a6826";
+	compatible = "siflower,sf21a6826";
+
+	chosen {
+		stdout-path = &uart1;
+		tick-timer = &timer;
+	};
+
+};
+
+&soc {
+	pinctrl-names = "default";
+	pinctrl-0 = <&clk_pins>;
+};
+
+&uart1 {
+	u-boot,dm-pre-reloc;
+};
+
+&watchdog {
+	u-boot,dm-pre-reloc;
+};
+
+&timer0 {
+	u-boot,dm-pre-reloc;
+};
+
+&spi0 {
+	status = "okay";
+
+	flash@0 {
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		spi-max-frequency = <20000000>;
+		spi-tx-bus-width = <4>;
+		spi-rx-bus-width = <4>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+	};
+};
+
+&i2c0 {
+	status = "disabled";
+
+	eeprom@0 {
+		compatible = "i2c-eeprom";
+		reg = <0x57>;
+		u-boot,i2c-offset-len = <2>;
+	};
+};
+
+&gmac0 {
+	status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+	phy-handle = <&sfphy1>;
+};
+
+&gmac1 {
+	status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+	phy-handle = <&sfphy2>;
+};
+
+&gmac2 {
+	status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+	phy-handle = <&sfphy3>;
+};
+
+&gmac3 {
+	status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+	phy-handle = <&sfphy4>;
+};
+
+&mdio0 {
+	sfphy1: ethernet-phy@1 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0x1>;
+		reset-gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
+		reset-assert-us = <10000>;
+		reset-deassert-us = <100000>;
+	};
+
+	sfphy2: ethernet-phy@2 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0x2>;
+	};
+
+	sfphy3: ethernet-phy@3 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0x3>;
+	};
+
+	sfphy4: ethernet-phy@4 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0x4>;
+	};
+};
+
+&xpcs0 {
+	enable;
+};

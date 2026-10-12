@@ -1,0 +1,46 @@
+if ARCH_SIFLOWER
+
+config SYS_SOC
+	default "siflower"
+
+config SYS_VENDOR
+	default "siflower"
+
+config SF21H8898
+	bool "Siflower SF21H8898 SoC"
+
+config SF21H8898_MPW0
+	bool "Select Siflower SF21H8898 MPW0 SoC"
+	select SYS_HAS_ARMV8_SECURE_BASE
+
+choice
+	prompt "Siflower board select"
+
+config TARGET_SF21H8898
+	bool "Siflower SF21H8898 SoC"
+	select ARM64
+	select ARMV8_SET_SMPEN
+	select GICV3
+	help
+	  Siflower SF21H8898 Soc.
+
+endchoice
+
+config SYS_BOARD
+	string "Board name"
+	default "sf21h8898" if TARGET_SF21H8898
+	default ""
+	help
+	  This option contains information about board name.
+	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD> will
+	  be used.
+
+config SYS_CONFIG_NAME
+	string "Board configuration name"
+	default "sf21h8898" if TARGET_SF21H8898
+	default ""
+	help
+	  This option contains information about board configuration name.
+	  Based on this option include/configs/<CONFIG_SYS_CONFIG_NAME>.h header
+	  will be used for board configuration.
+endif

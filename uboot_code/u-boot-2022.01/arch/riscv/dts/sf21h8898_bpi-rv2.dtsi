@@ -1,0 +1,120 @@
+// SPDX-License-Identifier: GPL-2.0
+#include "sf21a6826_fullmask.dtsi"
+
+/ {
+	chosen {
+		stdout-path = &uart1;
+		tick-timer = &timer;
+	};
+};
+
+&uart1 {
+	u-boot,dm-pre-reloc;
+};
+
+&watchdog {
+	u-boot,dm-pre-reloc;
+};
+
+&timer0 {
+	u-boot,dm-pre-reloc;
+};
+
+&spi0_pins {
+	pinctrl-single,pins = <
+		SPI0_TXD	FUNC_MODE0
+		SPI0_RXD	FUNC_MODE0
+		SPI0_CLK	FUNC_MODE0
+		SPI0_HOLD	FUNC_MODE0
+		SPI0_WP		FUNC_MODE0
+	>;
+};
+
+&i2c0 {
+	status = "disabled";
+};
+
+&gmac0 {
+        status = "okay";
+        phy-handle = <&phy1>;
+};
+
+&gmac1 {
+        status = "okay";
+        phy-handle = <&phy2>;
+};
+
+&gmac2 {
+        status = "okay";
+        phy-handle = <&phy3>;
+};
+
+&gmac3 {
+        status = "okay";
+        phy-handle = <&phy4>;
+};
+
+&gmac4 {
+        status = "okay";
+        phy-handle = <&phy15>;
+};
+
+&gmac5 {
+        status = "okay";
+        phy-mode = "rgmii";
+        phy-handle = <&phy6>;
+};
+
+&mdio0 {
+	reset-gpios = <&gpio 30 GPIO_ACTIVE_LOW>;
+	reset-delay-us = <10000>;
+	reset-post-delay-us = <100000>;
+
+	phy1: ethernet-phy@1 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0x1>;
+	};
+
+	phy2: ethernet-phy@2 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0x2>;
+	};
+
+	phy3: ethernet-phy@3 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0x3>;
+	};
+
+	phy4: ethernet-phy@4 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0x4>;
+	};
+
+	phy6: ethernet-phy@6 {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0x6>;
+		reset-gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
+		reset-assert-us = <10000>;
+		reset-deassert-us = <100000>;
+	};
+
+	phy15: ethernet-phy@f {
+		compatible = "ethernet-phy-ieee802.3-c22";
+		reg = <0xf>;
+		reset-gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
+		reset-assert-us = <10000>;
+		reset-deassert-us = <100000>;
+	};
+};
+
+&mdio1 {
+	status = "disabled";
+};
+
+&xpcs0 {
+	enable;
+};
+
+&xpcs1 {
+	enable;
+};

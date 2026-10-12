@@ -1,0 +1,524 @@
+// SPDX-License-Identifier: GPL-2.0
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/sf21h8898-fullmask-iomux.h>
+
+/ {
+	compatible = "siflower,sf21h8898";
+	#address-cells = <1>;
+	#size-cells = <1>;
+
+	cpus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		timebase-frequency = <60000000>;
+
+		cpu@0 {
+			compatible = "thead,c908", "riscv";
+			device_type = "cpu";
+			riscv,isa = "rv64imafdc";
+			riscv,isa-base = "rv64i";
+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c",
+						"sstc", "svnapot", "svpbmt", "zba", "zbb", "zbc", "zbs", "zicbom", "zicbop", "zicboz", "zicntr", "zicsr", "zifencei", "zihintpause", "zihpm";
+			reg = <0>;
+			i-cache-block-size = <64>;
+			i-cache-size = <32768>;
+			i-cache-sets = <128>;
+			d-cache-block-size = <64>;
+			d-cache-size = <32768>;
+			d-cache-sets = <128>;
+			next-level-cache = <&L2>;
+			mmu-type = "riscv,sv39";
+			operating-points-v2 = <&opp>;
+
+			cpu0_intc: interrupt-controller {
+				#interrupt-cells = <1>;
+				compatible = "riscv,cpu-intc";
+				interrupt-controller;
+			};
+		};
+
+		cpu@1 {
+			compatible = "thead,c908", "riscv";
+			device_type = "cpu";
+			riscv,isa = "rv64imafdc";
+			riscv,isa-base = "rv64i";
+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c",
+						"sstc", "svnapot", "svpbmt", "zba", "zbb", "zbc", "zbs", "zicbom", "zicbop", "zicboz", "zicntr", "zicsr", "zifencei", "zihintpause", "zihpm";
+			reg = <1>;
+			i-cache-block-size = <64>;
+			i-cache-size = <32768>;
+			i-cache-sets = <128>;
+			d-cache-block-size = <64>;
+			d-cache-size = <32768>;
+			d-cache-sets = <128>;
+			next-level-cache = <&L2>;
+			mmu-type = "riscv,sv39";
+			operating-points-v2 = <&opp>;
+
+			cpu1_intc: interrupt-controller {
+				#interrupt-cells = <1>;
+				compatible = "riscv,cpu-intc";
+				interrupt-controller;
+			};
+		};
+
+		cpu@2 {
+			compatible = "thead,c908", "riscv";
+			device_type = "cpu";
+			riscv,isa = "rv64imafdc";
+			riscv,isa-base = "rv64i";
+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c",
+						"sstc", "svnapot", "svpbmt", "zba", "zbb", "zbc", "zbs", "zicbom", "zicbop", "zicboz", "zicntr", "zicsr", "zifencei", "zihintpause", "zihpm";
+			reg = <2>;
+			i-cache-block-size = <64>;
+			i-cache-size = <32768>;
+			i-cache-sets = <128>;
+			d-cache-block-size = <64>;
+			d-cache-size = <32768>;
+			d-cache-sets = <128>;
+			next-level-cache = <&L2>;
+			mmu-type = "riscv,sv39";
+			operating-points-v2 = <&opp>;
+
+			cpu2_intc: interrupt-controller {
+				#interrupt-cells = <1>;
+				compatible = "riscv,cpu-intc";
+				interrupt-controller;
+			};
+		};
+
+		cpu@3 {
+			compatible = "thead,c908", "riscv";
+			device_type = "cpu";
+			riscv,isa = "rv64imafdc";
+			riscv,isa-base = "rv64i";
+			riscv,isa-extensions = "i", "m", "a", "f", "d", "c",
+						"sstc", "svnapot", "svpbmt", "zba", "zbb", "zbc", "zbs", "zicbom", "zicbop", "zicboz", "zicntr", "zicsr", "zifencei", "zihintpause", "zihpm";
+			reg = <3>;
+			i-cache-block-size = <64>;
+			i-cache-size = <32768>;
+			i-cache-sets = <128>;
+			d-cache-block-size = <64>;
+			d-cache-size = <32768>;
+			d-cache-sets = <128>;
+			next-level-cache = <&L2>;
+			mmu-type = "riscv,sv39";
+			operating-points-v2 = <&opp>;
+
+			cpu3_intc: interrupt-controller {
+				#interrupt-cells = <1>;
+				compatible = "riscv,cpu-intc";
+				interrupt-controller;
+			};
+		};
+
+		opp: opp_table {
+			compatible = "operating-points-v2";
+			opp-shared;
+
+			opp-1200000000 {
+				opp-hz = /bits/ 64 <1200000000>;
+				clock-latency-ns = <1000>;
+			};
+
+			opp-800000000 {
+				opp-hz = /bits/ 64 <800000000>;
+				clock-latency-ns = <1000>;
+			};
+
+			opp-600000000 {
+				opp-hz = /bits/ 64 <600000000>;
+				clock-latency-ns = <1000>;
+			};
+
+			opp-400000000 {
+				opp-hz = /bits/ 64 <400000000>;
+				clock-latency-ns = <1000>;
+			};
+
+			opp-300000000 {
+				opp-hz = /bits/ 64 <300000000>;
+				clock-latency-ns = <1000>;
+			};
+
+			opp-200000000 {
+				opp-hz = /bits/ 64 <200000000>;
+				clock-latency-ns = <1000>;
+			};
+
+			opp-100000000 {
+				opp-hz = /bits/ 64 <100000000>;
+				clock-latency-ns = <1000>;
+			};
+		};
+
+		L2: l2-cache {
+			compatible = "cache";
+			cache-level = <2>;
+			cache-block-size = <64>;
+			cache-size = <262144>;
+			cache-sets = <256>;
+			cache-unified;
+		};
+	};
+
+	cpuapb {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		compatible = "simple-bus";
+//		ranges;
+
+		plic: interrupt-controller@108000000 {
+			compatible = "thead,c900-plic", "riscv,plic0";
+			reg = <0x1 0x8000000 0x0 0x4000000>;
+			riscv,ndev = <256>;
+		};
+
+		clint: timer@10c000000 {
+			compatible = "thead,c900-clint", "riscv,clint0";
+			reg = <0x1 0xc000000 0x0 0x10000>;
+		};
+	};
+
+	spi_clk: spi-clk {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <200000000>;
+	};
+
+	apb_clk: apb-clk {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <187500000>;
+	};
+
+
+	timer: timer {
+		compatible = "riscv,timer";
+	};
+
+	soc {
+		compatible = "simple-bus";
+		#address-cells = <2>;
+		#size-cells = <2>;
+		u-boot,dm-pre-reloc;
+
+		gmac0: ethernet@8000000 {
+			compatible = "siflower,sf21h8898-xgmac";
+			reg = <0x0 0x8000000 0x0 0x4000>;
+			phy-mode = "qsgmii";
+			pcs-handle = <&xpcs0>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&mac0_mdio_pins>;
+			dmas = <&edma 0>, <&edma 1>;
+			status = "disabled";
+
+			mdio0: mdio {
+				#address-cells = <1>;
+				#size-cells = <0>;
+			};
+		};
+
+		gmac1: ethernet@8004000 {
+			compatible = "siflower,sf21h8898-xgmac";
+			reg = <0x0 0x8004000 0x0 0x4000>;
+			phy-mode = "qsgmii";
+			pcs-handle = <&xpcs0>;
+			dmas = <&edma 0>, <&edma 1>;
+			status = "disabled";
+		};
+
+		gmac2: ethernet@8008000 {
+			compatible = "siflower,sf21h8898-xgmac";
+			reg = <0x0 0x8008000 0x0 0x4000>;
+			phy-mode = "qsgmii";
+			pcs-handle = <&xpcs0>;
+			dmas = <&edma 0>, <&edma 1>;
+			status = "disabled";
+		};
+
+		gmac3: ethernet@800c000 {
+			compatible = "siflower,sf21h8898-xgmac";
+			reg = <0x0 0x800c000 0x0 0x4000>;
+			phy-mode = "qsgmii";
+			pcs-handle = <&xpcs0>;
+			dmas = <&edma 0>, <&edma 1>;
+			status = "disabled";
+		};
+
+		gmac4: ethernet@8010000 {
+			compatible = "siflower,sf21h8898-xgmac";
+			reg = <0x0 0x8010000 0x0 0x4000>;
+			phy-mode = "2500base-x";
+			pcs-handle = <&xpcs1>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&mac4_mdio_pins>;
+			dmas = <&edma 0>, <&edma 1>;
+			status = "disabled";
+
+			mdio1: mdio {
+				#address-cells = <1>;
+				#size-cells = <0>;
+			};
+		};
+
+		gmac5: ethernet@8014000 {
+			compatible = "siflower,sf21h8898-xgmac";
+			reg = <0x0 0x8014000 0x0 0x4000>;
+			phy-mode = "rgmii";
+			pinctrl-names = "default";
+			pinctrl-0 = <&rgmii_pins>;
+			dmas = <&edma 0>, <&edma 1>;
+			status = "disabled";
+		};
+
+		edma: dma-controller@8018000 {
+			compatible = "siflower,sf21h8898-xgmac-dma";
+			reg = <0x0 0x8018000 0x0 0x4000>;
+			#dma-cells = <1>;
+			dma-channels = <2>;
+		};
+
+		xpcs-mdio@8800000 {
+			compatible = "siflower,sf21h8898-xpcs-mdio";
+			reg = <0x0 0x8800000 0x0 0x1000000>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			xpcs0: xpcs@0 {
+				compatible = "snps,dw-xpcs";
+				reg = <0x0>;
+				// mode: 1 for qsgmii, 2 for sgmii, 3 for usxgmii
+				mode = <0x1>;
+			};
+
+			xpcs1: xpcs@1 {
+				compatible = "snps,dw-xpcs";
+				reg = <0x1>;
+				// mode: 1 for qsgmii, 2 for sgmii, 3 for usxgmii
+				mode = <0x2>;
+			};
+		};
+
+
+		spi0: spi@c200000 {
+			compatible = "siflower,sf-exspi";
+			reg = <0x0 0xc200000 0x0 0x1000>;
+			clocks = <&spi_clk>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&spi0_pins>;
+			status = "disabled";
+			#address-cells = <1>;
+			#size-cells = <0>;
+		};
+
+		rst: reset-controller@0xce08400 {
+			compatible = "siflower_i2c_reset";
+			#reset-cells = <1>;
+			reg = <0x0 0xce08400 0x0 0x1000>;
+		};
+
+		i2c0: i2c@c100000 {
+			compatible = "snps,designware-i2c";
+			reg = <0x0 0xc100000 0x0 0x1000>;
+			clocks = <&apb_clk>;
+			clock-frequency = <400000>;
+			pinctrl-0 = <&i2c0_pins>;
+			pinctrl-names = "default";
+			status = "disabled";
+			resets = <&rst 0>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+		};
+
+		uart0: serial@c300000 {
+			compatible = "arm,pl011";
+			reg = <0x0 0xc300000 0x0 0x1000>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&uart0_pins>;
+			status = "disabled";
+		};
+
+		uart1: serial@c301000 {
+			compatible = "arm,pl011";
+			reg = <0x0 0xc301000 0x0 0x1000>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&uart1_pins>;
+			status = "disabled";
+		};
+
+		watchdog: watchdog@0c700000 {
+			compatible = "snps,dw-wdt";
+			reg = <0x0 0x0c700000 0x0 0x1000>;
+			clocks = <&apb_clk>;
+			status = "disabled";
+		};
+
+		timer0: timer0@0c600000 {
+			compatible = "snps,dw-apb-timer";
+			reg = <0x0 0x0c600000 0x0 0x1000>;
+			clocks = <&apb_clk>;
+			clock-names = "timer";
+			status = "disabled";
+		};
+
+		timer1: timer1@0c601000 {
+			compatible = "snps,dw-apb-timer";
+			reg = <0x0 0x0c601000 0x0 0x1000>;
+			clocks = <&apb_clk>;
+			clock-names = "timer";
+			status = "disabled";
+		};
+
+		gpio: gpio@c800000 {
+			compatible = "siflower,sfax8-gpio";
+			reg = <0x0 0xc800000 0x0 0x100000>;
+
+			gpio-controller;
+			#gpio-cells = <2>;
+
+			ngpios = <41>;
+			gpio-ranges = <&iomux 0 0 41>;
+		};
+
+		iomux: iomux@ce3c000 {
+			compatible = "pinctrl-single";
+			reg = <0x0 0xce3c000 0x0 0xa4>;
+			#address-cells = <1>;
+			#size-cells = <1>;
+			#pinctrl-cells = <1>;
+
+			pinctrl-single,register-width = <32>;
+			pinctrl-single,function-mask = <FUNC_MODE_MASK>;
+			pinctrl-single,gpio-range = <&range 0 41 GPIO_MODE>;
+
+			range: gpio-range {
+				#pinctrl-single,gpio-range-cells = <3>;
+			};
+
+			clk_pins: clk_pins {
+				pinctrl-single,pins = <
+					EXT_CLK_IN	FUNC_MODE0
+					CLK_OUT		FUNC_MODE0
+				>;
+			};
+
+			spi0_pins: spi0_pins {
+				pinctrl-single,pins = <
+					SPI0_TXD	FUNC_MODE0
+					SPI0_RXD	FUNC_MODE0
+					SPI0_CLK	FUNC_MODE0
+					SPI0_CSN	FUNC_MODE0
+					SPI0_HOLD	FUNC_MODE0
+					SPI0_WP		FUNC_MODE0
+				>;
+			};
+
+			jtag_pins: jtag_pins {
+				pinctrl-single,pins = <
+					JTAG_TDO	FUNC_MODE0
+					JTAG_TDI	FUNC_MODE0
+					JTAG_TMS	FUNC_MODE0
+					JTAG_TCK	FUNC_MODE0
+					JTAG_RST	FUNC_MODE0
+				>;
+			};
+
+			uart0_pins: uart0_pins {
+				pinctrl-single,pins = <
+					JTAG_TDO	FUNC_MODE1
+					JTAG_TDI	FUNC_MODE1
+					JTAG_TMS	FUNC_MODE1
+					JTAG_TCK	FUNC_MODE1
+				>;
+			};
+
+			uart1_pins: uart1_pins {
+				pinctrl-single,pins = <
+					UART1_TX	FUNC_MODE0
+					UART1_RX	FUNC_MODE0
+				>;
+			};
+
+			uart1_full_pins: uart1_full_pins {
+				pinctrl-single,pins = <
+					UART1_TX	FUNC_MODE0
+					UART1_RX	FUNC_MODE0
+					I2C0_DAT	FUNC_MODE1
+					I2C0_CLK	FUNC_MODE1
+				>;
+			};
+
+			i2c0_pins: i2c0_pins {
+				pinctrl-single,pins = <
+					I2C0_DAT	FUNC_MODE0
+					I2C0_CLK	FUNC_MODE0
+				>;
+			};
+
+			perst_pins: perst_pins {
+				pinctrl-single,pins = <
+					I2C0_DAT	FUNC_MODE2
+					I2C0_CLK	FUNC_MODE2
+				>;
+			};
+
+			i2c1_pins: i2c1_pins {
+				pinctrl-single,pins = <
+					I2C1_DAT	FUNC_MODE0
+					I2C1_CLK	FUNC_MODE0
+				>;
+			};
+
+			pwm_pins: pwm_pins {
+				pinctrl-single,pins = <
+					PWM0		FUNC_MODE0
+					PWM1		FUNC_MODE0
+				>;
+			};
+
+			rgmii_pins: rgmii_pins {
+				pinctrl-single,pins = <
+					RGMII_GTX_CLK	FUNC_MODE0
+				//	RGMII_TXCLK	FUNC_MODE0
+					RGMII_TXD0	FUNC_MODE0
+					RGMII_TXD1	FUNC_MODE0
+					RGMII_TXD2	FUNC_MODE0
+					RGMII_TXD3	FUNC_MODE0
+					RGMII_TXCTL	FUNC_MODE0
+					RGMII_RXCLK	FUNC_MODE0
+					RGMII_RXD0	FUNC_MODE0
+					RGMII_RXD1	FUNC_MODE0
+					RGMII_RXD2	FUNC_MODE0
+					RGMII_RXD3	FUNC_MODE0
+					RGMII_RXCTL	FUNC_MODE0
+				>;
+			};
+
+			spi1_pins: spi1_pins {
+				pinctrl-single,pins = <
+					RGMII_GTX_CLK	FUNC_MODE1
+					RGMII_TXCLK	FUNC_MODE1
+					RGMII_TXD0	FUNC_MODE1
+				/*	RGMII_TXD1	FUNC_MODE1	*/
+					RGMII_TXD2	FUNC_MODE1
+					RGMII_TXD3	FUNC_MODE1
+				>;
+			};
+
+			mac0_mdio_pins: mac0_mdio_pins {
+				pinctrl-single,pins = <
+					QSGMII_MDIO	FUNC_MODE0
+					QSGMII_MDC	FUNC_MODE0
+				>;
+			};
+
+			mac4_mdio_pins: mac4_mdio_pins {
+				pinctrl-single,pins = <
+					SXGMII_MDIO	FUNC_MODE0
+					SXGMII_MDC	FUNC_MODE0
+				>;
+			};
+		};
+	};
+};

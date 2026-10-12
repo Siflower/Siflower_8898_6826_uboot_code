@@ -1,0 +1,6 @@
+SF21H8898_V2
+M:	mark.cai <mark.cai@siflower.com.cn>
+S:	Maintained
+F:	board/siflower/riscv
+F:	include/configs/sf21h8898.h
+F:	configs/siflower_sf21h8898_fullmask_evb_defconfig

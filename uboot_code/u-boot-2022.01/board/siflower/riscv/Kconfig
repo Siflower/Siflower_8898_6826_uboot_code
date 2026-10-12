@@ -1,0 +1,185 @@
+# SPDX-License-Identifier: GPL-2.0+
+# Copyright (C) 2019-20 Sean Anderson <seanga2@gmail.com>
+
+if TARGET_SF21H8898_V2
+
+config SYS_BOARD
+	default "riscv"
+
+config SYS_VENDOR
+	default "siflower"
+
+config SYS_CPU
+	default "siflower"
+
+config SYS_CONFIG_NAME
+	default "sf21h8898"
+
+config SYS_TEXT_BASE
+	default 0x80000000
+
+config DEFAULT_DEVICE_TREE
+	default "sf21h8898_fullmask_evb"
+
+config NR_CPUS
+	default 2
+
+config NR_DRAM_BANKS
+	default 1
+
+config BOARD_SPECIFIC_OPTIONS
+	def_bool y
+	imply DM_SERIAL
+	imply CPU
+	imply PL011_SERIAL
+#	imply SIFIVE_CLINT
+	imply POWER_DOMAIN
+#	imply SIMPLE_PM_BUS
+#	imply DM_RESET
+#	imply RESET_SYSCON
+#	imply SYSRESET
+#	imply SYSRESET_SYSCON
+	imply PINCTRL
+	imply PINCONF
+#	imply PINCTRL_K210
+	imply DM_GPIO
+	imply SFAX8_GPIO
+#	imply CMD_GPIO
+#	imply LED
+#	imply LED_GPIO
+	imply SPI
+	imply DESIGNWARE_SPI
+	imply SF_EXSPI
+	imply SPI_FLASH_GIGADEVICE
+	imply SPI_FLASH_WINBOND
+#	imply DM_MTD
+#	imply SPI_FLASH_MTD
+#	imply CMD_MTD
+#	imply ENV_IS_IN_SPI_FLASH
+	imply DOS_PARTITION
+	imply EFI_PARTITION
+#	imply CMD_PART
+#	imply CMD_FS_GENERIC
+endif
+
+if TARGET_SF23A2892
+
+config SYS_BOARD
+	default "riscv"
+
+config SYS_VENDOR
+	default "siflower"
+
+config SYS_CPU
+	default "siflower"
+
+config SYS_CONFIG_NAME
+	default "sf23a2892"
+
+config SYS_TEXT_BASE
+	default 0x80000000
+
+config DEFAULT_DEVICE_TREE
+	default "sf23a2892_fullmask_evb"
+
+config NR_CPUS
+	default 2
+
+config NR_DRAM_BANKS
+	default 1
+
+config BOARD_SPECIFIC_OPTIONS
+	def_bool y
+	imply DM_SERIAL
+	imply CPU
+	imply PL011_SERIAL
+#	imply SIFIVE_CLINT
+	imply POWER_DOMAIN
+#	imply SIMPLE_PM_BUS
+#	imply DM_RESET
+#	imply RESET_SYSCON
+#	imply SYSRESET
+#	imply SYSRESET_SYSCON
+	imply PINCTRL
+	imply PINCONF
+#	imply PINCTRL_K210
+	imply DM_GPIO
+	imply SFAX8_GPIO
+#	imply CMD_GPIO
+#	imply LED
+#	imply LED_GPIO
+	imply SPI
+	imply DESIGNWARE_SPI
+	imply SF_EXSPI
+	imply SPI_FLASH_GIGADEVICE
+	imply SPI_FLASH_WINBOND
+#	imply DM_MTD
+#	imply SPI_FLASH_MTD
+#	imply CMD_MTD
+#	imply ENV_IS_IN_SPI_FLASH
+	imply DOS_PARTITION
+	imply EFI_PARTITION
+#	imply CMD_PART
+#	imply CMD_FS_GENERIC
+endif
+
+if TARGET_SF21A6826
+
+config SYS_BOARD
+	default "riscv"
+
+config SYS_VENDOR
+	default "siflower"
+
+config SYS_CPU
+	default "siflower"
+
+config SYS_CONFIG_NAME
+	default "sf21a6826"
+
+config SYS_TEXT_BASE
+	default 0x80000000
+
+config DEFAULT_DEVICE_TREE
+	default "sf21a6826_fullmask_evb"
+
+config NR_CPUS
+	default 2
+
+config NR_DRAM_BANKS
+	default 3
+
+config BOARD_SPECIFIC_OPTIONS
+	def_bool y
+	imply DM_SERIAL
+	imply CPU
+	imply PL011_SERIAL
+#	imply SIFIVE_CLINT
+	imply POWER_DOMAIN
+#	imply SIMPLE_PM_BUS
+#	imply DM_RESET
+#	imply RESET_SYSCON
+#	imply SYSRESET
+#	imply SYSRESET_SYSCON
+	imply PINCTRL
+	imply PINCONF
+#	imply PINCTRL_K210
+	imply DM_GPIO
+	imply SFAX8_GPIO
+#	imply CMD_GPIO
+#	imply LED
+#	imply LED_GPIO
+	imply SPI
+	imply DESIGNWARE_SPI
+	imply SF_EXSPI
+	imply SPI_FLASH_GIGADEVICE
+	imply SPI_FLASH_WINBOND
+#	imply DM_MTD
+#	imply SPI_FLASH_MTD
+#	imply CMD_MTD
+#	imply ENV_IS_IN_SPI_FLASH
+	imply DOS_PARTITION
+	imply EFI_PARTITION
+#	imply CMD_PART
+#	imply CMD_FS_GENERIC
+endif

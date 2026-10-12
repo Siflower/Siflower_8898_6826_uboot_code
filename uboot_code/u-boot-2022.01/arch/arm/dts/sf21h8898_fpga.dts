@@ -1,0 +1,68 @@
+// SPDX-License-Identifier: GPL-2.0
+
+/dts-v1/;
+#include "sf21h8898.dtsi"
+
+/ {
+	model = "sf21h8898";
+	compatible = "siflower,sf21h8898";
+
+	chosen {
+		stdout-path = &uart1;
+		tick-timer = &timer0;
+	};
+
+};
+
+&uart1 {
+	u-boot,dm-pre-reloc;
+};
+
+&watchdog {
+	u-boot,dm-pre-reloc;
+};
+
+&timer0 {
+	u-boot,dm-pre-reloc;
+};
+
+&spi0 {
+	status = "okay";
+
+	flash@0 {
+		compatible = "jedec,spi-nor";
+		reg = <0>;
+		spi-max-frequency = <20000000>;
+		spi-tx-bus-width = <4>;
+		spi-rx-bus-width = <4>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+	};
+};
+
+&gmac4 {
+	status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+	phy-mode = "rgmii-id";
+	phy-handle = <&mvphy>;
+	rx-internal-delay-ps = <5000>;
+	tx-internal-delay-ps = <5000>;
+};
+
+&xgmac {
+	status = "okay";
+	local-mac-address = [10 23 45 67 89 ab];
+
+	fixed-link {
+		speed = <10000>;
+		full-duplex;
+		pause;
+	};
+};
+
+&mdio {
+	mvphy: ethernet-phy@5 {
+		reg = <0x5>;
+		reset-gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
+	};
+};

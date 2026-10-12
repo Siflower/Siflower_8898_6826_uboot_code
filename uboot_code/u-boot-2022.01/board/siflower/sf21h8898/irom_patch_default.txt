@@ -1,0 +1,5 @@
+1 7800 ## 1 for enable irom patch, 0 for disable; patch_addr in hex
+1 0 454000e 11200018 0 0 0
+1 0 454000e 1120001c 0 0 0
+1 0 454000e 11200020 0 0 0
+1 1 454000e 11200024 0 0 0
